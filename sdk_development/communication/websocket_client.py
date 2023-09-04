@@ -37,7 +37,9 @@ class WebSocketClient(Communication):
             await self.websocket.close()
             self.websocket = None
 
-    async def send(self, command: str, parameters: Dict[str, Any] = {}, id: int = 0) -> None:
+    async def send(
+        self, command: str, parameters: Dict[str, Any] = {}, id: int = 0
+    ) -> None:
         """
         Send a command message over the WebSocket connection.
 
@@ -53,3 +55,11 @@ class WebSocketClient(Communication):
         """Await and receive a message response from the WebSocket. Returns the parsed message."""
         response = await self.websocket.recv()
         return parse_received_message(response)
+
+
+class MessageParsingError(Exception):
+    """Exception raised for errors in the input message format."""
+
+    def __init__(self, message="Message format is invalid"):
+        self.message = message
+        super().__init__(self.message)
