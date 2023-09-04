@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "sdk_development"
+version = "0.1.0"
+description = ""
+authors = ["Nikolaus Naredi-Rainer <nikolaus.naredi-rainer@zuehlke.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.25.1"
+websockets = "^11.0.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.4.1"
+pylint = "^2.17.5"
+black = "^23.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
