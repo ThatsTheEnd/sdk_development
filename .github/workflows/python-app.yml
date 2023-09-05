@@ -1,6 +1,9 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
+# The poetry part was stolen from:
+# https://joaodlf.com/using-poetry-in-github-actions-the-easy-way.html
+
 name: Python application
 
 on:
@@ -48,4 +51,3 @@ jobs:
     - name: Lint with pylint
       run:  |
         python -m poetry run python -m pylint  $(git ls-files '*.py')
-
