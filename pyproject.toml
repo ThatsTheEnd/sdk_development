@@ -6,20 +6,52 @@ authors = ["Nikolaus Naredi-Rainer <nikolaus.naredi-rainer@zuehlke.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.8.1"
 requests = "^2.25.1"
 websockets = "^11.0.3"
-
-[tool.poetry.dev-dependencies]
-pytest = "^7.4.1"
-pylint = "^2.17.5"
-black = "^23.7.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.1"
 pytest-mock = "^3.11.1"
+pylint = "^2.17.5"
+black = "^23.7.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+### TOOLS CONFIG ###
+[tool.pylint.main]
+load-plugins="my_pylint_extension"
+ignore = "generated_code,docs"
+good-names= [
+        "i",
+        "j",
+        "ex",
+        "e",
+        "oe"
+]
+
+[tool.pylint.messages_control]
+disable = [
+        "duplicate-code",
+        "line-too-long",
+        "too-few-public-methods",
+        "missing-class-docstring",
+        "missing-module-docstring",
+        "missing-function-docstring",
+        "too-many-instance-attributes",
+        "too-many-arguments",
+        "too-many-public-methods",
+        "too-many-lines",
+        "W0511",  # ignores the strange "T o D o" errors from pylint
+        "E0401",
+        "bad-plugin-value",
+        "W0012",
+        "wrong-import-order",
+        "no-name-in-module",
+        "W0107"
+]
+[tool.pylint.typecheck]
+ignored-classes = "cx_Oracle"

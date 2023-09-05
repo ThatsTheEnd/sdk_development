@@ -29,7 +29,7 @@ class WebSocketClient(Communication):
 
     async def connect(self) -> None:
         """Establish a WebSocket connection to the provided URI."""
-        self.websocket = await websockets.connect(self.uri)
+        self.websocket = await websockets.connect(self.uri)  # pylint: disable=no-member
 
     async def disconnect(self) -> None:
         """Close the active WebSocket connection if one exists."""
@@ -38,7 +38,7 @@ class WebSocketClient(Communication):
             self.websocket = None
 
     async def send(
-        self, command: str, parameters: Dict[str, Any] = {}, id: int = 0
+        self, command: str, parameters: Dict[str, Any], message_id: int = 0
     ) -> None:
         """
         Send a command message over the WebSocket connection.
@@ -46,9 +46,9 @@ class WebSocketClient(Communication):
         Args:
             command (str): The command to send.
             parameters (Dict[str, Any], optional): Additional parameters for the command. Defaults to {}.
-            id (int, optional): The ID of the message. Defaults to 0.
+            message_id (int, optional): The ID of the message. Defaults to 0.
         """
-        message = format_message(command, parameters, id)
+        message = format_message(command, parameters, message_id)
         await self.websocket.send(json.dumps(message))
 
     async def receive(self) -> Dict[str, Any]:
