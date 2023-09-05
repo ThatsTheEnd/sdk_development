@@ -1,5 +1,6 @@
-from sdk_development.communication import WebSocketClient, MessageParsingError
-from sdk_development.utils import Result, Error
+from sdk_development.communication import WebSocketClient  # , MessageParsingError
+
+# from sdk_development.utils import Result, Error
 
 
 def test_initialization():
