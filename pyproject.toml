@@ -16,6 +16,7 @@ pytest = "^7.4.1"
 pytest-mock = "^3.11.1"
 pylint = "^2.17.5"
 black = "^23.7.0"
+mypy = "^1.5.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -55,3 +56,18 @@ disable = [
 ]
 [tool.pylint.typecheck]
 ignored-classes = "cx_Oracle"
+
+[tool.mypy]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+exclude = ["generated_code", "venv", "site-packages", "tests"]
+show_error_codes = true
+disable_error_code = ["misc", "empty-body", "attr-defined"]
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disable_error_code = "union-attr"
+
+[[tool.mypy.overrides]]
+module = ["my.components.generated_code.*"]
+ignore_errors = true

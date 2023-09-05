@@ -4,6 +4,9 @@ from typing import Any, Dict
 from .base_communication import Communication
 from .message_parser import format_message, parse_received_message
 
+# type: ignore[attr-defined]
+# mypy doesn't find the connection methods
+
 
 class WebSocketClient(Communication):
     """
@@ -29,7 +32,7 @@ class WebSocketClient(Communication):
 
     async def connect(self) -> None:
         """Establish a WebSocket connection to the provided URI."""
-        self.websocket = await websockets.connect(self.uri)  # pylint: disable=no-member
+        self.websocket = await websockets.connect(self.uri)  # pylint: disable=no-member, type: ignore[attr-defined]
 
     async def disconnect(self) -> None:
         """Close the active WebSocket connection if one exists."""
@@ -49,17 +52,17 @@ class WebSocketClient(Communication):
             message_id (int, optional): The ID of the message. Defaults to 0.
         """
         message = format_message(command, parameters, message_id)
-        await self.websocket.send(json.dumps(message))
+        await self.websocket.send(json.dumps(message))  # type: ignore[attr-defined]
 
     async def receive(self) -> Dict[str, Any]:
         """Await and receive a message response from the WebSocket. Returns the parsed message."""
-        response = await self.websocket.recv()
+        response = await self.websocket.recv()  # type: ignore[attr-defined]
         return parse_received_message(response)
 
 
 class MessageParsingError(Exception):
     """Exception raised for errors in the input message format."""
 
-    def __init__(self, message="Message format is invalid"):
+    def __init__(self, message: str = "Message format is invalid") -> None:
         self.message = message
         super().__init__(self.message)
