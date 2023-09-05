@@ -46,5 +46,6 @@ jobs:
         python -m poetry run python -m pytest -sxv
 
     - name: Lint with pylint
-      run: pylint  $(git ls-files '*.py')
+      run:  |
+        python -m poetry run python -m pylint  $(git ls-files '*.py')
 
