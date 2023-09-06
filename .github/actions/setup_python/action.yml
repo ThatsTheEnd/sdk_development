@@ -26,6 +26,16 @@ runs:
         python -m pip install poetry==1.5.1
       shell: bash
 
+    - name: Verify Poetry Installation Path
+      run: |
+        which poetry || true
+      shell: bash
+
+    - name: List contents of .poetry directory
+      run: |
+        ls -la ~/.poetry || true
+      shell: bash
+
     - name: Configure Poetry
       run: |
         python -m poetry config virtualenvs.in-project true
