@@ -25,8 +25,8 @@ Here, we're building a versatile SDK for our devices. It's designed to be effici
 ### Prerequesits
 These code pieces rely on an installed version of the SDK.
 
-1. Log into [horiba.com](www.horiba.com) with your user account or create a new account
-2. Enter your Horiba hardware serial number(s) to see if you have access to the SDK
+1. Log into [hawaii.com](www.hawaii.com) with your user account or create a new account
+2. Enter your hawaii hardware serial number(s) to see if you have access to the SDK
 3. Download and install the SDK
 4. You can a successful installation by running the following commands in a shell:
 
@@ -39,7 +39,7 @@ These code pieces rely on an installed version of the SDK.
 
 ### As a SDK user
 Code examples for different programming languages like _Python_, _LabVIEW_ and _C#_ can be found in the [examples](./examples/)
-Instruction videos on how to use the SDK can be found on the [horiba youtube channel](https://www.youtube.com/user/HORIBAScientificVDO)
+Instruction videos on how to use the SDK can be found on the [hawaii youtube channel](https://www.youtube.com/user/hawaiiScientificVDO)
 The full documentation of the APi can be found on [Read the docs](https://readthedocs.org/)
 
 ### As Contributor to the SDK
