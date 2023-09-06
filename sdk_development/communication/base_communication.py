@@ -1,3 +1,22 @@
+"""
+base_communication.py
+
+A foundational module providing an abstract base class for defining the communication
+contract. The `Communication` class lays out the blueprint for communication methods
+that any concrete implementation must provide.
+
+The abstract methods in this class ensure that any derived class will have a consistent
+interface for connecting, disconnecting, sending, and receiving messages, enabling
+flexible and standardized communication across different mediums or protocols.
+
+Classes:
+- Communication: Abstract base class that provides a contract for communication methods.
+
+Dependencies:
+- abc: For abstract base class support.
+- typing: For type annotations.
+"""
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict
 
