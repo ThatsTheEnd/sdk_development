@@ -1,0 +1,34 @@
+# .github/actions/setup/action.yml
+name: 'Setup Python and Poetry'
+description: 'Setup Python 3.10, Install and Configure Poetry, Cache Virtual Environment, and Install Dependencies'
+
+inputs: {} # No inputs for now
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    - name: Install Poetry
+      run: |
+        python -m pip install poetry==1.5.1
+      shell: bash
+
+    - name: Configure Poetry
+      run: |
+        python -m poetry config virtualenvs.in-project true
+      shell: bash
+
+    - name: Cache the Virtual Environment
+      uses: actions/cache@v3
+      with:
+        path: ./.venv
+        key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+
+    - name: Install Dependencies
+      run: |
+        python -m poetry install
+      shell: bash
