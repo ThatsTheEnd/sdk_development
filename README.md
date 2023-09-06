@@ -46,7 +46,11 @@ This package is built with poetry, so make sure to head over to [Poetry](https:/
 
 1. **Installation**:
     ```bash
-    poetry install
+   cd /PathWhereYouWantThisRepo 
+   git clone https://github.com/ThatsTheEnd/sdk_development.git .
+   cd sdk_development
+   pip install poetry
+   poetry install
     ```
 
 2. **Running Tests**:
