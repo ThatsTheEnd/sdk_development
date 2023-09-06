@@ -28,7 +28,7 @@ build-backend = "poetry.core.masonry.api"
 ### TOOLS CONFIG ###
 [tool.pylint.main]
 load-plugins="my_pylint_extension"
-ignore = "generated_code,docs"
+ignore = "generated_code,docs,tests"
 good-names= [
         "i",
         "j",
@@ -63,7 +63,7 @@ ignored-classes = "cx_Oracle"
 [tool.mypy]
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
-exclude = ["generated_code", "venv", "site-packages", "tests"]
+exclude = ["generated_code", "venv", "site-packages", "tests", "docs"]
 show_error_codes = true
 disable_error_code = ["misc", "empty-body", "attr-defined"]
 

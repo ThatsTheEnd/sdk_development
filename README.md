@@ -1,7 +1,7 @@
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Documentation Status](https://readthedocs.org/projects/your-project-name/badge/?version=latest)](https://your-project-name.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/hawaii-sdk/badge/?version=latest)](https://hawaii-sdk.readthedocs.io/en/latest/?badge=latest)
 [![Test and Build](https://github.com/ThatsTheEnd/sdk_development/actions/workflows/python-app.yml/badge.svg)](https://github.com/ThatsTheEnd/sdk_development/actions/workflows/python-app.yml)
 
 
