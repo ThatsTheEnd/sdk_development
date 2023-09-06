@@ -1,4 +1,5 @@
 # .github/actions/setup/action.yml
+
 name: 'Setup Python and Poetry'
 description: 'Setup Python 3.10, Install and Configure Poetry, Cache Virtual Environment, and Install Dependencies'
 
@@ -12,7 +13,15 @@ runs:
       with:
         python-version: "3.10"
 
+    - name: Cache Poetry
+      id: cache-poetry
+      uses: actions/cache@v3
+      with:
+        path: ~/.poetry
+        key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
+
     - name: Install Poetry
+      if: steps.cache-poetry.outputs.cache-hit != 'true'
       run: |
         python -m pip install poetry==1.5.1
       shell: bash
