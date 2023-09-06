@@ -18,7 +18,14 @@ author = "Niko Naredi"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ['sphinx.ext.autodoc',
+    'sphinx.ext.coverage',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode']
+
+napoleon_google_docstring = True
+napoleon_use_param = False
+napoleon_use_ivar = True
 
 templates_path = ["_templates"]
 exclude_patterns = []
