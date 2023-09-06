@@ -1,3 +1,16 @@
+"""
+message_parser.py
+
+A module for formatting and parsing messages. Provides utility functions
+to structure messages for sending and to parse received messages into
+a more manageable format.
+
+Functions:
+- format_message: Prepare a message with a command, parameters, and a message ID.
+- parse_received_message: Parse a raw message string into a structured dictionary.
+- parse_errors: Transform a list of error strings into a structured list of error dictionaries.
+"""
+
 import json
 from typing import Any, Dict, List
 

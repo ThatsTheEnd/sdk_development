@@ -1,3 +1,25 @@
+"""
+websocket_client.py
+
+A module that provides a WebSocket client for asynchronous communication using the
+WebSocket protocol. The WebSocket client is an implementation of the `Communication`
+interface, which abstracts the details of connecting, sending, receiving, and disconnecting
+from a WebSocket server.
+
+This module also defines a custom exception `MessageParsingError` which is raised for
+issues related to the message format.
+
+Classes:
+- WebSocketClient: Concrete implementation of the `Communication` interface using WebSockets.
+- MessageParsingError: Custom exception for handling message format errors.
+
+Dependencies:
+- websockets: For WebSocket protocol support.
+- json: For parsing and encoding JSON messages.
+- .base_communication: Provides the abstract `Communication` contract.
+- .message_parser: Utility functions for message formatting and parsing.
+"""
+
 import json
 import websockets
 from typing import Any, Dict
