@@ -3,7 +3,7 @@
 name: 'Setup Python and Poetry'
 description: 'Setup Python 3.10, Install and Configure Poetry, Cache Virtual Environment, and Install Dependencies'
 
-inputs: {} # No inputs for now
+inputs: { } # No inputs for now
 
 runs:
   using: 'composite'
@@ -12,13 +12,6 @@ runs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-
-    - name: Cache Poetry
-      id: cache-poetry
-      uses: actions/cache@v3
-      with:
-        path: /opt/hostedtoolcache/Python/3.10.13/x64/bin/
-        key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
 
     - name: Install Poetry
       if: steps.cache-poetry.outputs.cache-hit != 'true'
@@ -29,11 +22,6 @@ runs:
     - name: Verify Poetry Installation Path
       run: |
         which poetry || true
-      shell: bash
-
-    - name: List contents of .poetry directory
-      run: |
-        ls -la ~/.poetry || true
       shell: bash
 
     - name: Configure Poetry
