@@ -17,7 +17,7 @@ runs:
       id: cache-poetry
       uses: actions/cache@v3
       with:
-        path: ~/opt/hostedtoolcache/Python/3.10.13/x64/bin/
+        path: /opt/hostedtoolcache/Python/3.10.13/x64/bin/
         key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
 
     - name: Install Poetry
