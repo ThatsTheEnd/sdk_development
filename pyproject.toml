@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "sdk_development"
+name = "hawaii_sdk"
 version = "0.1.0"
 description = ""
 authors = ["Nikolaus Naredi-Rainer <nikolaus.naredi-rainer@zuehlke.com>"]
@@ -26,6 +26,12 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 ### TOOLS CONFIG ###
+[tool.pytest.ini_options]
+markers = [
+    "hardware: mark test to require hardware"
+]
+
+
 [tool.pylint.main]
 load-plugins="my_pylint_extension"
 ignore = "generated_code,docs,tests"

@@ -18,6 +18,8 @@ permissions:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    env:
+      HAS_HARDWARE: 'false'
 
     steps:
     - uses: actions/checkout@v3
