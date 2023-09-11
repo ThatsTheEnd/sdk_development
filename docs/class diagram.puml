@@ -1,0 +1,80 @@
+@startuml
+!define RECTANGLE class
+
+abstract RECTANGLE AbstractCommunicator #palegreen {
+    +connect(): Result
+    +send(command: String): Result
+    +receive(): Result<String>
+    +send_and_receive(): Result<String>
+    +disconnect(): Result
+}
+
+RECTANGLE TelNetCommunicator #palegreen {
+    +connect(): Result
+    +send(command: String): Result
+    +receive(): Result<String>
+    +send_and_receive(): Result<String>
+    +disconnect(): Result
+    -uri: String
+}
+
+RECTANGLE WebsocketCommunicator {
+    +connect(): Result
+    +send(command: String): Result
+    +receive(): Result<String>
+    +send_and_receive(): Result<String>
+    +disconnect(): Result
+    -uri: String
+}
+
+abstract RECTANGLE AbstractDevice {
+    +list(): Result<List<String>>
+    +open(): Result
+    +close(): Result
+    +getConfig(): Result<Configuration>
+    -device_type: String
+    -device_id: String
+    -communication: AbstractCommunicator
+    -manager: DeviceManager
+}
+
+RECTANGLE CCDCamera {
+    +getAcqData(): Result<AcquisitionData>
+    +getChipSize(): Result<ChipSize>
+    +getChipTemperature(): Result<Temperature>
+}
+
+RECTANGLE Monochromator {
+    +move(): Result
+    +getPosition(): Result<Position>
+}
+
+abstract RECTANGLE AbstractMultiDevice {
+    +run(): Result
+    -devices: List<Device>
+}
+
+RECTANGLE RangeScan {
+    +run(): Result
+    -scan_start_wl: int
+    -scan_stop_wl: int
+    -stitching_mode: enum
+}
+
+RECTANGLE DeviceManager {
+    +start_acl(): Result
+    +discover_devices(): Result
+    +get_communicator(): Result<AbstractCommunicator>
+    +stop_acl(): Result
+}
+
+AbstractCommunicator <|-- TelNetCommunicator
+AbstractCommunicator <|-- WebsocketCommunicator
+AbstractDevice <|-- CCDCamera
+AbstractDevice <|-- Monochromator
+AbstractMultiDevice <|-- RangeScan
+AbstractMultiDevice "2..n" *-- AbstractDevice
+AbstractDevice *--> AbstractCommunicator
+AbstractDevice *--> DeviceManager
+
+@enduml

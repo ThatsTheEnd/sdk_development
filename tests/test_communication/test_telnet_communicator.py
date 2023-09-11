@@ -2,7 +2,7 @@
 
 import pytest
 import os
-from sdk_development.communication import TelnetCommunicator
+from sdk_development.communication import TelnetCommunicator, MockedTelnetCommunicator
 
 
 @pytest.fixture(scope="function")
@@ -54,34 +54,3 @@ def test_telnet_communicator_send_help(reset_singleton, communicator_class):
     communicator.close()
     # Then the first five elements of the response matches the expected partial response
     assert response[:5] == expected_partial_response
-
-
-class MockedTelnetCommunicator:
-    """Mocked class to simulate communication"""
-    def __init__(self, host, port=25000):
-        self.command = ''
-
-    def send(self, command):
-        self.command = command
-
-    def receive(self, timeout=10):
-        # Just for this example, we'll simulate responses based on specific commands
-        if self.command == "bla":
-            return ["\r", "Error: Unknown command\r", "-501\r", "cmd: "]
-        elif self.command == "help":
-            return [
-                "\r",
-                "\r",
-                "Remote Command Interface Commands:\r",
-                " Node Commands\r",
-                "    exit                        - Disconnect\r",
-            ]
-        else:
-            return ["cmd: "]  # Default response
-
-    def send_and_receive(self, command):
-        self.send(command)
-        return self.receive()  # Simulate by directly returning a response
-
-    def close(self):
-        pass  # This won't actually close any connection since it's mocked

@@ -15,7 +15,7 @@ class TelnetCommunicator(AbstractCommunicator):
     port: int
     _connection: Optional[telnetlib.Telnet]
 
-    def __init__(self, host: str, port: int = 25000) -> None:
+    def __init__(self, host: str = 'localhost', port: int = 25000) -> None:
         """
         Initialize a Telnet communicator.
 
