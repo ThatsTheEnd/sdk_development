@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 import pytest
 import os
 from sdk_development.communication import TelnetCommunicator
@@ -38,7 +40,7 @@ def test_telnet_communicator_send_invalid_command(reset_singleton, communicator_
     assert response == expected_response
 
 
-def test_telnet_communicator_send_help(reset_singleton):
+def test_telnet_communicator_send_help(reset_singleton, communicator_class):
     expected_partial_response = [
         "\r",
         "\r",
@@ -46,7 +48,7 @@ def test_telnet_communicator_send_help(reset_singleton):
         " Node Commands\r",
         "    exit                        - Disconnect\r",
     ]
-    communicator = TelnetCommunicator(host="localhost", port=25000)
+    communicator = communicator_class(host="localhost", port=25000)
     # Try sending valid command
     response = communicator.send_and_receive("help")
     communicator.close()
@@ -65,7 +67,7 @@ class MockedTelnetCommunicator:
     def receive(self, timeout=10):
         # Just for this example, we'll simulate responses based on specific commands
         if self.command == "bla":
-            return ["\r", "Error: Unknown command\r", "-502\r", "cmd: "]
+            return ["\r", "Error: Unknown command\r", "-501\r", "cmd: "]
         elif self.command == "help":
             return [
                 "\r",
@@ -83,4 +85,3 @@ class MockedTelnetCommunicator:
 
     def close(self):
         pass  # This won't actually close any connection since it's mocked
-

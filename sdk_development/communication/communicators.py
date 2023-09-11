@@ -1,9 +1,8 @@
 import telnetlib
 from typing import List, Optional
 
-from .error_codes import RCIError as Error
+# from .error_codes import RCIError as Error
 from .abstracts import AbstractCommunicator
-from .command_builders import TelnetCommandBuilder
 
 
 class TelnetCommunicator(AbstractCommunicator):
@@ -15,7 +14,6 @@ class TelnetCommunicator(AbstractCommunicator):
     host: str
     port: int
     _connection: Optional[telnetlib.Telnet]
-    command_builder: TelnetCommandBuilder
 
     def __init__(self, host: str, port: int = 25000) -> None:
         """
@@ -29,7 +27,6 @@ class TelnetCommunicator(AbstractCommunicator):
         self.port = port
         self._connection = None
         self._connection = self._connect()
-        self.command_builder = TelnetCommandBuilder()
 
     def _connect(self) -> Optional[telnetlib.Telnet]:
         """
@@ -44,9 +41,8 @@ class TelnetCommunicator(AbstractCommunicator):
             self._connection.write(b"\r\n")
             self._connection.read_until(b"cmd: ", 10)
             return self._connection
-        except Exception as e:
-            print(f"Error connecting to {self.host}: {e}")
-            return None
+        except ConnectionRefusedError as e:
+            raise ConnectionError(f"Error connecting to {self.host}: {e}") from e
 
     def send(self, command: str) -> None:
         """
@@ -55,7 +51,10 @@ class TelnetCommunicator(AbstractCommunicator):
         Args:
             command (str): Command to be sent.
         """
-        self._connection.write(command.encode("ascii") + b"\r\n")
+        if self._connection is not None:
+            self._connection.write(command.encode("ascii") + b"\r\n")
+        else:
+            raise ValueError("Connection is not established.")
 
     def receive(self, timeout: int = 10) -> List[str]:
         """
@@ -67,12 +66,15 @@ class TelnetCommunicator(AbstractCommunicator):
         Returns:
             List[str]: List of response lines.
         """
+        if self._connection is None:
+            raise ConnectionError("No active connection")
+
         try:
             response = self._connection.read_until(b"cmd: ", timeout)
             return response.decode("ascii").split("\n")
-        except Exception as e:
-            print(f"Error receiving data: {e}")
-            return [str(Error)]
+
+        except ConnectionRefusedError as e:
+            raise ConnectionError(f"Error connecting to {self.host}: {e}") from e
 
     def send_and_receive(self, command: str) -> list[str]:
         """

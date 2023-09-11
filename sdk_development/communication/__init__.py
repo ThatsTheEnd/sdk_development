@@ -29,4 +29,3 @@ await ws.disconnect()
 
 # Necessary to make Python treat the directory as a package
 from .communicators import TelnetCommunicator
-from .command_builders import TelnetCommandBuilder

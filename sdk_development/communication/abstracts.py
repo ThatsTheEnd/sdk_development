@@ -1,5 +1,6 @@
+import telnetlib
 from abc import ABC, abstractmethod
-from typing import Any, Dict, TypeVar
+from typing import Any, Dict, TypeVar, Union, List
 
 T = TypeVar("T", bound="SingletonMeta")
 
@@ -9,9 +10,9 @@ class SingletonMeta(type):
     The SingletonMeta metaclass ensures that there's only one instance of any class that uses it as its metaclass.
     """
 
-    _instances: Dict[T, T] = {}
+    _instances: Dict[T, T] = {}  # type: ignore
 
-    def __call__(cls: T, *args: Any, **kwargs: Any) -> T:
+    def __call__(cls: T, *args: Any, **kwargs: Any) -> T:  # ignore [valid-type]
         if cls not in cls._instances:
             cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
@@ -42,7 +43,7 @@ class AbstractCommunicator(ABC):
     """
 
     @abstractmethod
-    def _connect(self) -> None:
+    def _connect(self) -> Union[None, telnetlib.Telnet]:
         """
         Abstract method to establish a connection.
         """
@@ -59,7 +60,7 @@ class AbstractCommunicator(ABC):
         pass
 
     @abstractmethod
-    def receive(self, timeout: int = 10) -> str:
+    def receive(self, timeout: int = 10) -> Union[str, List[str]]:
         """
         Abstract method to receive a response.
 

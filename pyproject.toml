@@ -34,7 +34,8 @@ markers = [
 
 [tool.pylint.main]
 load-plugins="my_pylint_extension"
-ignore = "generated_code,docs,tests"
+ignore = ["generated_code", "docs", "tests"]
+ignore-paths = '/tools/.*$'
 good-names= [
         "i",
         "j",
@@ -61,7 +62,8 @@ disable = [
         "W0012",
         "wrong-import-order",
         "no-name-in-module",
-        "W0107"
+        "W0107",
+        "W4901"
 ]
 [tool.pylint.typecheck]
 ignored-classes = "cx_Oracle"
@@ -69,7 +71,7 @@ ignored-classes = "cx_Oracle"
 [tool.mypy]
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
-exclude = ["generated_code", "venv", "site-packages", "tests", "docs"]
+exclude = ["generated_code", "venv", "site-packages", "tests", "docs", "old_python_examples"]
 show_error_codes = true
 disable_error_code = ["misc", "empty-body", "attr-defined"]
 
