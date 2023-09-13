@@ -1,11 +1,11 @@
 import time
 import logging
 from typing import Tuple, Union, List, TYPE_CHECKING
-from sdk_development.devices.device_manager import DeviceManager
-from sdk_development.devices.single_devices.abstract_device import AbstractDevice
+from hawaii_sdk.devices.device_manager import DeviceManager
+from hawaii_sdk.devices.single_devices.abstract_device import AbstractDevice
 
 if TYPE_CHECKING:
-    from sdk_development.communication import AbstractCommunicator
+    from hawaii_sdk.communication import AbstractCommunicator
 
 
 logging.basicConfig(level=logging.INFO)

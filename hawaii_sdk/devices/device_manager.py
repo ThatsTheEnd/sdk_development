@@ -33,11 +33,11 @@ https://docs.python.org/3/library/typing.html#typing.TYPE_CHECKING
 import logging
 import subprocess
 from typing import Dict, List, Type
-from sdk_development.communication import AbstractCommunicator, TelnetCommunicator
+from hawaii_sdk.communication import AbstractCommunicator, TelnetCommunicator
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from sdk_development.devices.single_devices import AbstractDevice
+    from hawaii_sdk.devices.single_devices import AbstractDevice
 
 logging.basicConfig(level=logging.INFO)
 

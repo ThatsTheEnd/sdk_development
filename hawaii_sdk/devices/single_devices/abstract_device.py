@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from sdk_development.devices.device_manager import DeviceManager
+from hawaii_sdk.devices.device_manager import DeviceManager
 
 
 class AbstractDevice(ABC):

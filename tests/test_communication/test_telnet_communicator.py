@@ -2,7 +2,7 @@
 
 import pytest
 import os
-from sdk_development.communication import TelnetCommunicator, MockedTelnetCommunicator
+from hawaii_sdk.communication import TelnetCommunicator, MockedTelnetCommunicator
 
 
 @pytest.fixture(scope="function")

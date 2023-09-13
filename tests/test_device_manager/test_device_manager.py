@@ -4,8 +4,8 @@ import os
 import time
 import pytest
 import subprocess
-from sdk_development.devices import DeviceManager
-from sdk_development.communication import MockedTelnetCommunicator
+from hawaii_sdk.devices import DeviceManager
+from hawaii_sdk.communication import MockedTelnetCommunicator
 
 
 # This fixture ensures DeviceManager is clean for each test

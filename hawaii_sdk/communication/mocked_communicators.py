@@ -3,7 +3,7 @@
 import telnetlib
 from typing import Union, List
 
-from sdk_development.communication import AbstractCommunicator
+from hawaii_sdk.communication import AbstractCommunicator
 
 
 class MockedTelnetCommunicator(AbstractCommunicator):
