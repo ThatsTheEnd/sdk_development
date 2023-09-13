@@ -73,6 +73,19 @@ class AbstractCommunicator(ABC):
         pass
 
     @abstractmethod
+    def send_and_receive(self, command: str) -> Union[str, List[str]]:
+        """
+        Send a command and immediately attempt to receive a response.
+
+        Args:
+            command (str): Command to be sent.
+
+        Returns:
+            List[str]: List of response lines.
+        """
+        pass
+
+    @abstractmethod
     def close(self) -> None:
         """
         Abstract method to close the connection.

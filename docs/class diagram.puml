@@ -61,7 +61,9 @@ RECTANGLE RangeScan {
     -stitching_mode: enum
 }
 
-RECTANGLE DeviceManager {
+RECTANGLE DeviceManager #palegreen {
+    -Communicator: AbstractCommunicator
+    -DeviceList: [AbstractDevice]
     +start_acl(): Result
     +discover_devices(): Result
     +get_communicator(): Result<AbstractCommunicator>
@@ -75,6 +77,7 @@ AbstractDevice <|-- Monochromator
 AbstractMultiDevice <|-- RangeScan
 AbstractMultiDevice "2..n" *-- AbstractDevice
 AbstractDevice *--> AbstractCommunicator
-AbstractDevice *--> DeviceManager
+AbstractDevice <--* "1..n" DeviceManager
+DeviceManager *--> AbstractCommunicator
 
 @enduml
