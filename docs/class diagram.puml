@@ -2,6 +2,8 @@
 !define RECTANGLE class
 
 abstract RECTANGLE AbstractCommunicator #palegreen {
+    - host: str
+    - port: int
     +connect(): Result
     +send(command: String): Result
     +receive(): Result<String>
@@ -10,43 +12,38 @@ abstract RECTANGLE AbstractCommunicator #palegreen {
 }
 
 RECTANGLE TelNetCommunicator #palegreen {
-    +connect(): Result
-    +send(command: String): Result
-    +receive(): Result<String>
-    +send_and_receive(): Result<String>
-    +disconnect(): Result
-    -uri: String
+
 }
 
 RECTANGLE WebsocketCommunicator {
-    +connect(): Result
-    +send(command: String): Result
-    +receive(): Result<String>
-    +send_and_receive(): Result<String>
-    +disconnect(): Result
-    -uri: String
+
 }
 
-abstract RECTANGLE AbstractDevice {
-    +list(): Result<List<String>>
+abstract RECTANGLE AbstractDevice #palegreen {
     +open(): Result
     +close(): Result
     +getConfig(): Result<Configuration>
-    -device_type: String
     -device_id: String
     -communication: AbstractCommunicator
     -manager: DeviceManager
 }
 
 RECTANGLE CCDCamera {
-    +getAcqData(): Result<AcquisitionData>
-    +getChipSize(): Result<ChipSize>
-    +getChipTemperature(): Result<Temperature>
+    +setup_ccd(): InitData
+    +get_acq_data(): Result<AcquisitionData>
+    +get_chip_size(): Result<ChipSize>
+    +get_chip_temperature(): Result<Temperature>
 }
 
-RECTANGLE Monochromator {
-    +move(): Result
-    +getPosition(): Result<Position>
+RECTANGLE Monochromator #palegreen {
+    +mono_number: int
+    +home():
+    +is_mono_busy(): Bool
+    +get_position(): Position
+    +set_position(): Position
+    +set_position_no_wait(): Position
+    +get_grating_info(): Grating
+    +stop_movement()
 }
 
 abstract RECTANGLE AbstractMultiDevice {
@@ -55,18 +52,16 @@ abstract RECTANGLE AbstractMultiDevice {
 }
 
 RECTANGLE RangeScan {
-    +run(): Result
     -scan_start_wl: int
     -scan_stop_wl: int
     -stitching_mode: enum
 }
 
-RECTANGLE DeviceManager #palegreen {
-    -Communicator: AbstractCommunicator
-    -DeviceList: [AbstractDevice]
+RECTANGLE DeviceManager << (S,#FF7700) Singleton >> #palegreen {
+    +communicator: AbstractCommunicator
+    +device_list: [AbstractDevice]
     +start_acl(): Result
     +discover_devices(): Result
-    +get_communicator(): Result<AbstractCommunicator>
     +stop_acl(): Result
 }
 
