@@ -29,12 +29,15 @@ jobs:
 
     - name: Run Tests with Pytest
       run: |
+        cd python
         python -m poetry run python -m pytest -sxv
 
     - name: Check with Mypy
       run: |
+        cd python
         python -m poetry run python -m mypy .
 
     - name: Lint with Pylint
       run: |
+        cd python
         python -m poetry run python -m pylint $(git ls-files '*.py')
