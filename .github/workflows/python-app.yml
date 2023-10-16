@@ -4,7 +4,7 @@
 # The poetry part was stolen from:
 # https://joaodlf.com/using-poetry-in-github-actions-the-easy-way.html
 
-name: Test and Build
+name: Test and Build Python
 
 on:
   push:
