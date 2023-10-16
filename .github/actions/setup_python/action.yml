@@ -37,5 +37,6 @@ runs:
 
     - name: Install Dependencies
       run: |
+        cd python
         python -m poetry install
       shell: bash
