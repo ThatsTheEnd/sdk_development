@@ -8,7 +8,8 @@ name: Test and Build Python
 
 on:
   push:
-    branches: [ "main" ]
+    branches: 
+      - '**' # wildcard '*' to match all branch names
   pull_request:
     branches: [ "main" ]
 
