@@ -29,7 +29,7 @@ These code pieces rely on an installed version of the SDK.
 3. Download and install the SDK
 4. You can a successful installation by running the following commands in a shell:
 
-   ```sh
+   ```sh 
    MySDK --version
    ```
    This must return a version string, e.g. "1.7.3"
